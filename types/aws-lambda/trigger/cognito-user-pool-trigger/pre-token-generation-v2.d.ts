@@ -1,6 +1,10 @@
 import { Handler } from "../../handler";
 import { BaseTriggerEvent, StringMap } from "./_common";
 
+export interface ComplexOverride {
+    [key: string]: string | number | boolean | string[] | number[] | boolean[] | ComplexOverride
+}
+
 export interface GroupOverrideDetailsV2 {
     groupsToOverride?: string[] | undefined;
     iamRolesToOverride?: string[] | undefined;
@@ -11,12 +15,12 @@ export interface GroupOverrideDetailsV2 {
  * @see https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-pre-token-generation.html#cognito-user-pools-lambda-trigger-syntax-pre-token-generation
  */
 export interface IdTokenGeneration {
-    claimsToAddOrOverride?: StringMap | undefined;
+    claimsToAddOrOverride?: ComplexOverride | undefined;
     claimsToSuppress?: string[] | undefined;
 }
 
 export interface AccessTokenGeneration {
-    claimsToAddOrOverride?: StringMap | undefined;
+    claimsToAddOrOverride?: ComplexOverride | undefined;
     claimsToSuppress?: string[] | undefined;
     scopesToAdd?: string[] | undefined;
     scopesToSuppress?: string[] | undefined;
